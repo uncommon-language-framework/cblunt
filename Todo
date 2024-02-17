@@ -1,0 +1,2 @@
+- have compiler recognize entrypoint
+- have compiler track external refs and load them in to actual global func names

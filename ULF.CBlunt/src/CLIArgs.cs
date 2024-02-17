@@ -1,4 +1,3 @@
-using System.Collections;
 using CommandLine;
 
 namespace ULF.CBlunt;
@@ -19,9 +18,13 @@ class CLIArgs
 		
 		CLIArgs parsedArgs = result.Value;
 	
-		parsedArgs.OutFile = parsedArgs.OutFile == string.Empty ? "OutputDecompiledAssembly.cpp" : parsedArgs.OutFile;
+		parsedArgs.OutFile = parsedArgs.OutFile == string.Empty ? "OutputAssembly.cpp" : parsedArgs.OutFile;
 
-		parsedArgs.CompilationAssemblyName = parsedArgs.OutFile[..parsedArgs.OutFile.LastIndexOf('.')]+".dll";
+		int baseNameEndIdx = parsedArgs.OutFile.LastIndexOf('.');
+
+		if (baseNameEndIdx == -1) baseNameEndIdx = parsedArgs.OutFile.Length;
+
+		parsedArgs.CompilationAssemblyName = parsedArgs.OutFile[..baseNameEndIdx]+".dll";
 
 		foreach (var fileName in parsedArgs.FileNames)
 		{

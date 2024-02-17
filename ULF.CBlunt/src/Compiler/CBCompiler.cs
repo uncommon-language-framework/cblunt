@@ -1,6 +1,8 @@
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using ULF.CBlunt.Compiler.Declarations;
+using ULF.CBlunt.Compiler.DefaultTypes;
 
 namespace ULF.CBlunt.Compiler;
 
@@ -35,12 +37,13 @@ class CBCompiler
 	{
 		var root = SyntaxTree.GetCompilationUnitRoot();
 
-		CSNativeSyntaxWalker walker = new();
+		CBNativeSyntaxWalker walker = new();
 
-		walker.Init(CompilationUnit);
+		walker.Init(CompilationUnit, SyntaxTree, DefaultMetadata.DefaultIncludedTypes);
 		walker.Visit(root);
 
-		CompilationUnit.Metadata = BuildMeta();
+		// ULR will generate default ctors and dtors for us @ runtime
+		CompilationUnit.Metadata = BuildMeta().ReplaceLineEndings("\n");
 
 		return CompilationUnit;
 	}

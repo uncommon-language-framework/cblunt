@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 
 namespace ULF.CBlunt;
 
-public class Program
+class Program
 {
 	static int Main(string[] args)
 	{
@@ -49,7 +49,10 @@ public class Program
 
 			CompilationUnit result = compiler.Compile();
 			
-			Console.WriteLine($"Parsed Metadata from Assembly {result.AssemblyName} (source file {fileName}): {result.Metadata.TrimEnd()}");
+			Console.WriteLine($"// Output Decompiled Assembly {result.AssemblyName} (source file {fileName}):");
+
+			Console.WriteLine();
+			Console.WriteLine(result.ToNativeCode());
 		}
 
 		return 0;

@@ -9,6 +9,7 @@ public readonly struct MethodDeclaration : IMemberDeclaration
 	public readonly byte OverloadNumber;
 	public readonly CompilationType For;
 	public readonly CompilationType[] Args;
+	public readonly string[] ArgNames;
 	public readonly CompilationType ReturnType;
 	public readonly ulong ModifierFlags;
 	
@@ -17,6 +18,7 @@ public readonly struct MethodDeclaration : IMemberDeclaration
 		string nativeCode,
 		CompilationType parentType,
 		CompilationType[] args,
+		string[] argNames,
 		CompilationType returnType,
 		ulong flags,
 		byte overloadNumber = 0)
@@ -25,6 +27,7 @@ public readonly struct MethodDeclaration : IMemberDeclaration
 		NativeCode = nativeCode;
 		For = parentType;
 		Args = args;
+		ArgNames = argNames;
 		ReturnType = returnType;
 		ModifierFlags = flags;
 		OverloadNumber = overloadNumber;
